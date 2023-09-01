@@ -1,0 +1,43 @@
+{% load static  %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Django Crud</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+   
+  </head>
+  <body>
+    <div class="relative flex flex-col border-2 w-full h-screen items-center align-center content-center justify-center">
+    <h1 class="text-3xl font-bold">
+      Task Crud!
+    </h1>
+
+    <form class="relative w-3/12 " action="/tasks/new/" method="POST">
+      {% csrf_token %}
+
+        <div>
+          <label for="title" class="block font-bold  text-sm font-medium leading-6 text-white">Title</label>
+          <div class="mt-2">
+            <input type="text" name="title" id="title" class="p-5  block w-full text-black rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          </div>
+        </div>
+        <div>
+          <label for="description" class="block font-bold  text-sm font-medium leading-6 text-white">Description</label>
+          <div class="mt-2">
+            <textarea id="description"  name="description" rows="10" class="p-5  block w-full text-black rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+          </div>
+        </div>
+        <div class='mt-5 relative flex w-'>
+          <button type="submit" class="rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save</button>
+        </div>
+    </form>
+      
+    <script src="" async defer></script>
+  </body>
+</html>
