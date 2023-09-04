@@ -7,5 +7,5 @@ class Task(models.Model):
   done = models.BooleanField(default=False)
   
   
-  def __str__(self):
-    return self.title
+  def des(self):
+    return {"id": self.id ,"title": self.title, "description": self.description, "done": self.done}

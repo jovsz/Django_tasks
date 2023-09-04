@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Django Crud</title>
+    <title>Django Crud - Update {{select}}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,37 +13,38 @@
   </head>
   <body>
     <div class="relative bg-gray-900 pt-5 flex flex-col border-2 w-full h-screen items-center align-center content-center justify-center">
-    <a href="/tasks/" class="text-3xl font-bold text-white">
-      To Do App
+    <a href='/tasks/' class="text-3xl font-bold text-white">
+      To Do App - Update {{select.description}}
     </a>
-
+    
     <div class="h-full relative flex w-3/12 flex-col justify-start">
-    <form class="relative  " action="/tasks/new/" method="POST">
+    <form class="relative  " action="{% url "put_task" select.id  %}" method="POST">
       {% csrf_token %}
         <div>
           <label for="title" class="block font-bold  text-sm font-medium leading-6 text-white">Title</label>
           <div class="mt-2">
-            <input type="text" required name="title" id="title" class="p-5  block w-full text-black rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input type="text" value={{select.title }} required name="title" id="title" class="p-5  block w-full text-black rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div>
           <label for="description" class="block font-bold  text-sm font-medium leading-6 text-white">Description</label>
           <div class="mt-2">
-            <textarea id="description" required name="description" rows="5" class="p-5  block w-full text-black rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+            <textarea id="description" required name="description" rows="5" class="p-5  block w-full text-black rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{select.description}}</textarea>
           </div>
         </div>
         <div>
-          <label for="done" class="block font-bold  text-sm font-medium leading-6 text-white">Status</label>
+          <label for="done" class="block font-bold  text-sm font-medium leading-6 text-white">Done</label>
           <div class="mt-2">
-            <input type="checkbox" id="done" name="done" class="p-5  block rounded-md py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input type="checkbox" checked={{select.done}} id="done" name="done" class="p-5  block rounded-md py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
+        
         <div class="mt-5 relative flex">
           <button type="submit" class="rounded-md bg-indigo-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save</button>
         </div>
     </form>
 
-    {{select}}
+    
     <div class="overflow-hidden mt-3 border rounded-md bg-white text-black shadow">
       <ul role="list" class="divide-y divide-gray-200">
         {% for task in tasks%}
@@ -67,7 +68,6 @@
               {% csrf_token %}
             <button type="submit" class="rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Delete</button>
             </form>
-          
           </div>
         </input>
         </li>
