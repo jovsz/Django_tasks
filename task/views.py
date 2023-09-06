@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Task
 
 
@@ -13,7 +14,9 @@ def signup(request):
     print("obteniendo datos", request.POST)
     if request.method == "GET":
         print("enviando formulario")
-        return render(request, "signup.html", {"form": UserCreationForm, "error": False})
+        return render(
+            request, "signup.html", {"form": UserCreationForm, "error": False}
+        )
     elif request.method == "POST":
         if request.POST["password"] != request.POST["repassword"]:
             return render(
@@ -27,9 +30,17 @@ def signup(request):
 
         errorLength = False
 
-        return render(
-            request, "signup.html", {"form": UserCreationForm, "error": errorLength}
-        )
+        try:
+            # Register User
+            user = User.objects.create_user(
+                request.POST["email"], request.POST["email"], request.POST["password"]
+            )
+            user.save()
+            return render(
+                request, "signup.html", {"form": UserCreationForm, "error": errorLength}
+            )
+        except:
+            print("error")
 
 
 def list_tasks(request):
